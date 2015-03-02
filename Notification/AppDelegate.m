@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate ()
-
+@interface AppDelegate () <CLLocationManagerDelegate>
+@property (nonatomic, strong) CLLocationManager  *locationManager;
 @end
 
 @implementation AppDelegate
@@ -17,6 +18,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    // request authorization to track the user’s location
+    //[locMan requestAlwaysAuthorization];
+    [_locationManager requestWhenInUseAuthorization];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }else{
+#ifndef __IPHONE_8_0
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+#endif//__IPHONE_8
+    }
+    
     return YES;
 }
 
@@ -28,6 +46,16 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSString * message = [NSString stringWithFormat:@"欢迎进入%@",@"Sensoro"];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = message;
+    notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5EF"]
+                                                             identifier:@"SensoroTest"];
+    notification.regionTriggersOnce = YES;
+    notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -40,6 +68,19 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorizedAlways) {
+        NSLog(@"已获得授权！");
+    }
+}
+
+- (void) locationManager:(CLLocationManager *)manager
+       didDetermineState:(CLRegionState)state
+               forRegion:(CLRegion *)region{
 }
 
 @end

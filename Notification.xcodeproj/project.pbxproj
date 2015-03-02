@@ -168,6 +168,11 @@
 				TargetAttributes = {
 					63CF1E1C1AA1FCF800ABB628 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					63CF1E351AA1FCF800ABB628 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -412,6 +417,7 @@
 				63CF1E421AA1FCF800ABB628 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63CF1E431AA1FCF800ABB628 /* Build configuration list for PBXNativeTarget "NotificationTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +426,7 @@
 				63CF1E451AA1FCF800ABB628 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
