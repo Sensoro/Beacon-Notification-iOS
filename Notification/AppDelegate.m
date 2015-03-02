@@ -21,7 +21,6 @@
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     // request authorization to track the user’s location
-    //[locMan requestAlwaysAuthorization];
     [_locationManager requestWhenInUseAuthorization];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
