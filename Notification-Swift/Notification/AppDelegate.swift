@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         var notification = UILocalNotification()
         notification.alertBody = messageString
         notification.region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "23A01AF0-232A-4518-9C0E-323FB773F5EF"), major: 0x8888, minor: 0x8888, identifier: "SensoroTest")
-        notification.regionTriggersOnce = true
+        notification.regionTriggersOnce = false
         notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.sharedApplication().scheduleLocalNotification(notification)

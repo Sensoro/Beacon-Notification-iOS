@@ -49,7 +49,7 @@
     NSString * message = [NSString stringWithFormat:@"欢迎进入%@",@"Sensoro"];
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
-    notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5E1"] major:0x8888 minor:0x8888
+    notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5EF"] major:0x8888 minor:0x8888
                                                              identifier:@"SensoroTest"];
     notification.regionTriggersOnce = NO;
     notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
