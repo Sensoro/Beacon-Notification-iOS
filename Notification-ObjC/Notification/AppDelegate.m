@@ -21,7 +21,7 @@
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     // request authorization to track the user’s location
-    [_locationManager requestWhenInUseAuthorization];
+    [_locationManager requestAlwaysAuthorization];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
@@ -49,9 +49,9 @@
     NSString * message = [NSString stringWithFormat:@"欢迎进入%@",@"Sensoro"];
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
-    notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5EF"]
+    notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5E1"] major:0x8888 minor:0x8888
                                                              identifier:@"SensoroTest"];
-    notification.regionTriggersOnce = YES;
+    notification.regionTriggersOnce = NO;
     notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     notification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -75,6 +75,13 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
         NSLog(@"已获得授权！");
     }
+}
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+    NSLog(@"Enter");
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+    NSLog(@"Exit");
 }
 
 - (void) locationManager:(CLLocationManager *)manager
