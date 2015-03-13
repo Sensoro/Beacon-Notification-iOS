@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         scheduleLocalNotification(false, tips: "谢谢光临")
     }
 
+    func applicationDidBecomeActive(application: UIApplication) {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
+    }
+    
     func scheduleLocalNotification(onEntry:Bool, tips:NSString!){
       
         var messageString = NSString(format: "%@Sensoro-Swift", tips)

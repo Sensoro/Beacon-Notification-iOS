@@ -51,6 +51,10 @@
     
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 - (void)scheduleLocalNotification:(BOOL)onEntry tips:(NSString *)tips{
     
     NSString * message = [NSString stringWithFormat:@"%@Sensoro-ObjC",tips];
