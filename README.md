@@ -20,6 +20,7 @@
  ![image](https://raw.githubusercontent.com/Sensoro/Beacon-Notification-iOS/master/Resources/Notification.JPG)
 
 如果您身边没有Beacon，您也可以在手机上装一个模拟云子的App
+
 下载链接：http://fir.im/wpko
 
 2. 然后编译运行本项目，离开Beacon的区域，并等一段时间，1分钟左右，（在配置工具里看不到了）
