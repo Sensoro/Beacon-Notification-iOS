@@ -33,22 +33,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         
             UIApplication.sharedApplication().registerForRemoteNotificationTypes((.Alert | .Sound | .Badge))
         }
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         return true
     }
 
 
     func applicationDidEnterBackground(application: UIApplication) {
-        
-        var messageString = "欢迎进入Sensoro" as NSString
+        // 进场
+        scheduleLocalNotification(true, tips: "欢迎进入")
+        // 离场
+        scheduleLocalNotification(false, tips: "谢谢光临")
+    }
+
+    func scheduleLocalNotification(onEntry:Bool, tips:NSString!){
+      
+        var messageString = NSString(format: "%@Sensoro-Swift", tips)
         var notification = UILocalNotification()
         notification.alertBody = messageString
-        notification.region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "23A01AF0-232A-4518-9C0E-323FB773F5EF"), major: 0x8888, minor: 0x8888, identifier: "SensoroTest")
+        notification.region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "23A01AF0-232A-4518-9C0E-323FB773F5EF"), major: 0x8888, minor: 0x8888, identifier: tips)
+        
+        notification.region.notifyOnEntry = onEntry
+        notification.region.notifyOnExit = !onEntry
         notification.regionTriggersOnce = false
+        
         notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
+  
     }
-
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if(status == .AuthorizedAlways){
@@ -56,8 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         }
     }
 
-    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-        println("进入")
-    }
+
 }
 
