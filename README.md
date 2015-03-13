@@ -4,7 +4,7 @@
 步骤:
 
 1. 首先使用配置工具配置相关的Beacon配置信息如下
-
+```
 {
 "beacon":true,
 "id":"23A01AF0-232A-4518-9C0E-323FB773F5EF",
@@ -13,12 +13,11 @@
 "tx":6,
 "ai":4,
 }
+```
 
 您也可以通过配置工具的扫一扫进行配置，二维码如下图
 
-
  ![image](https://raw.githubusercontent.com/Sensoro/Beacon-Notification-iOS/master/Resources/Notification.JPG)
-
 
 如果您身边没有Beacon，您也可以在手机上装一个模拟云子的App
 下载链接：http://fir.im/wpko
