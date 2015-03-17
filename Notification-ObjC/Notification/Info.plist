@@ -10,6 +10,8 @@
 	<string>com.sensoro.$(PRODUCT_NAME:rfc1034identifier)-ObjC</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>Notify_ObjC</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
