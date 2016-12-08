@@ -21,13 +21,9 @@
  ![image](https://raw.githubusercontent.com/Sensoro/Beacon-Notification-iOS/master/Resources/Notification.JPG)
  
 
-如果您身边没有Beacon，您也可以在手机上装一个模拟云子的App
-
-下载链接：http://fir.im/wpko
-
-2. 打开App，进入后台
-3. 离开Beacon的区域，会有离场消息弹出（谢谢光临Sensoro）
-4. 停留大概1分钟左右，然后进入到Beacon区域，会有进场消息弹出(欢迎进入Sensoro)。
+1. 打开App，进入后台
+2. 离开Beacon的区域，会有离场消息弹出（谢谢光临Sensoro）
+3. 停留大概1分钟左右，然后进入到Beacon区域，会有进场消息弹出(欢迎进入Sensoro)。
 
 
 注意事项：

@@ -15,27 +15,27 @@ class ViewController: UIViewController,UIAlertViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var width = UIScreen.mainScreen().bounds.width
-        var height = UIScreen.mainScreen().bounds.height
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
         
-        var configLabel = UILabel(frame: CGRectMake(0, 54, width, 44))
-        configLabel.textAlignment = .Center
+        let configLabel = UILabel(frame: CGRect(x: 0, y: 54, width: width, height: 44))
+        configLabel.textAlignment = .center
         configLabel.text = "ConfigSetting"
         self.view .addSubview(configLabel)
         
         // ImageView
-        imageView = UIImageView(frame: CGRectMake((width-300), 20, 300, 300));
-        imageView?.center = CGPointMake(width/2.0, height/2.0-64)
+        imageView = UIImageView(frame: CGRect(x: (width-300), y: 20, width: 300, height: 300));
+        imageView?.center = CGPoint(x: width/2.0, y: height/2.0-64)
         imageView?.image = UIImage(named: "notification")
         self.view.addSubview(imageView!)
         
         // Button
-        var imageViewHeight = imageView?.bounds.size.height
-        var saveButton: UIButton  = UIButton.buttonWithType(.System) as UIButton;
-        saveButton.frame = CGRectMake(0, (imageView?.frame.origin.y)! + imageViewHeight!, 80, 44);
-        saveButton.center = CGPointMake((imageView?.center.x)!, saveButton.center.y)
-        saveButton.setTitle("Save", forState: .Normal)
-        saveButton.addTarget(self, action: Selector("tapSaveImageToIphone"), forControlEvents: .TouchUpInside)
+        let imageViewHeight = imageView?.bounds.size.height
+        let saveButton = UIButton(type:.system);
+        saveButton.frame = CGRect(x: 0, y: (imageView?.frame.origin.y)! + imageViewHeight!, width: 80, height: 44);
+        saveButton.center = CGPoint(x: (imageView?.center.x)!, y: saveButton.center.y)
+        saveButton.setTitle("Save", for: UIControlState())
+        saveButton.addTarget(self, action: #selector(ViewController.tapSaveImageToIphone), for: .touchUpInside)
         self.view .addSubview(saveButton)
         
     }
@@ -47,15 +47,15 @@ class ViewController: UIViewController,UIAlertViewDelegate {
 
 
     func tapSaveImageToIphone(){
-       UIImageWriteToSavedPhotosAlbum(self.imageView!.image, self, Selector("saveImageComplete:didFinishSavingWithError:contextInfo:"), nil)
+       UIImageWriteToSavedPhotosAlbum(self.imageView!.image!, self, #selector(ViewController.saveImageComplete(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func saveImageComplete(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>)       {
+    func saveImageComplete(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer)       {
         if  error == nil{
-            var alert = UIAlertView(title: "Tips", message: "Has been saved to the album", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "OK")
+            let alert = UIAlertView(title: "Tips", message: "Has been saved to the album", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "OK")
             alert.show()
         }else{
-            var alert = UIAlertView(title: "Tips", message: "Failure", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "OK")
+            let alert = UIAlertView(title: "Tips", message: "Failure", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "OK")
             alert.show()
         }
     }

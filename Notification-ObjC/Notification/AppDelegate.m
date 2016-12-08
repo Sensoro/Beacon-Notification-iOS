@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager  *locationManager;
@@ -56,8 +57,8 @@
 }
 
 - (void)scheduleLocalNotification:(BOOL)onEntry tips:(NSString *)tips{
-    
     NSString * message = [NSString stringWithFormat:@"%@Sensoro-ObjC",tips];
+    
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
     notification.region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"23A01AF0-232A-4518-9C0E-323FB773F5EF"] major:0x8888 minor:0x8888
@@ -69,13 +70,11 @@
     notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     notification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     NSLog(@"本地通知 %@",notification.alertBody);
 }
-
 
 - (void)locationManager:(CLLocationManager *)manager
 didChangeAuthorizationStatus:(CLAuthorizationStatus)status
