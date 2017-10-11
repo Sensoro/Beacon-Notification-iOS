@@ -46,11 +46,11 @@ class ViewController: UIViewController,UIAlertViewDelegate {
     }
 
 
-    func tapSaveImageToIphone(){
+    @objc func tapSaveImageToIphone(){
        UIImageWriteToSavedPhotosAlbum(self.imageView!.image!, self, #selector(ViewController.saveImageComplete(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func saveImageComplete(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer)       {
+    @objc func saveImageComplete(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer)       {
         if  error == nil{
             let alert = UIAlertView(title: "Tips", message: "Has been saved to the album", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "OK")
             alert.show()
